@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /customer
+Disallow: /checkout
+Sitemap: {{ url('/sitemap.xml') }}
