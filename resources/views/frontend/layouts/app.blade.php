@@ -364,7 +364,7 @@
             }
 
             $.ajax({
-                url: '{{ url("/wishlist/toggle") }}',
+                url: '{{ url("/account/wishlist/toggle") }}',
                 method: 'POST',
                 data: { product_id: productId },
                 success: function(res) {

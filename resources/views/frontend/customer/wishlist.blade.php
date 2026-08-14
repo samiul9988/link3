@@ -14,18 +14,18 @@
         <div class="col-lg-9">
             <h4 class="fw-bold mb-4">My Wishlist</h4>
 
-            @if(isset($wishlistItems) && $wishlistItems->count())
+            @if(isset($wishlists) && $wishlists->count())
                 <div class="row g-3">
-                    @foreach($wishlistItems as $item)
+                    @foreach($wishlists as $item)
                         <div class="col-6 col-md-4 col-lg-3">
                             @include('frontend.partials.product-card', ['product' => $item->product, 'showAddToCart' => true])
                         </div>
                     @endforeach
                 </div>
 
-                @if($wishlistItems instanceof \Illuminate\Contracts\Pagination\LengthAwarePaginator)
+                @if($wishlists instanceof \Illuminate\Contracts\Pagination\LengthAwarePaginator)
                     <div class="d-flex justify-content-center mt-4">
-                        {{ $wishlistItems->links() }}
+                        {{ $wishlists->links() }}
                     </div>
                 @endif
             @else

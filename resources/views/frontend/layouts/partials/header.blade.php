@@ -86,8 +86,14 @@
                             @endauth
                         </div>
 
-                        <a href="{{ url('/wishlist') }}" class="btn btn-link text-dark p-0 position-relative d-none d-md-inline-block">
+                        <a href="{{ url('/account/wishlist') }}" class="btn btn-link text-dark p-0 position-relative d-none d-md-inline-block">
                             <i class="fa-regular fa-heart fs-5"></i>
+                            @auth('customer')
+                                @php $wishlistCount = \App\Models\Wishlist::where('customer_id', auth('customer')->id())->count(); @endphp
+                                @if($wishlistCount > 0)
+                                    <span class="cart-badge">{{ $wishlistCount }}</span>
+                                @endif
+                            @endauth
                         </a>
 
                         <a href="{{ url('/cart') }}" class="btn btn-link text-dark p-0 position-relative">

@@ -15,7 +15,7 @@
         <i class="fas fa-arrow-left me-1"></i> Back to Customers
     </a>
 
-    <form action="{{ route('admin.customers.toggleStatus', $customer) }}" method="POST" class="d-inline ms-2">
+    <form action="{{ route('admin.customers.status', $customer) }}" method="POST" class="d-inline ms-2">
         @csrf
         <button type="submit" class="btn btn-sm btn-{{ $customer->status ? 'danger' : 'success' }}">
             <i class="fas fa-{{ $customer->status ? 'ban' : 'check' }} me-1"></i>
