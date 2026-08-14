@@ -97,7 +97,7 @@
                         <h6 class="mb-0 fw-semibold">Update Order Status</h6>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.orders.updateStatus', $order) }}" method="POST">
+                        <form action="{{ route('admin.orders.status', $order) }}" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label">Order Status</label>
@@ -126,7 +126,7 @@
                         <h6 class="mb-0 fw-semibold">Update Payment Status</h6>
                     </div>
                     <div class="card-body">
-                        <form action="{{ route('admin.orders.updatePaymentStatus', $order) }}" method="POST">
+                        <form action="{{ route('admin.orders.payment', $order) }}" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label class="form-label">Payment Status</label>

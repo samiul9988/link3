@@ -87,6 +87,45 @@
         color: #dc2626;
         font-size: 0.9rem;
     }
+    .quantity-selector {
+        display: inline-flex;
+        align-items: center;
+        border: 1px solid #e5e7eb;
+        border-radius: 6px;
+        overflow: hidden;
+    }
+    .quantity-selector button {
+        width: 38px;
+        height: 38px;
+        border: none;
+        background: #f9fafb;
+        color: #374151;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .quantity-selector button:hover {
+        background: #e5e7eb;
+    }
+    .quantity-selector input {
+        width: 50px;
+        height: 38px;
+        border: none;
+        border-left: 1px solid #e5e7eb;
+        border-right: 1px solid #e5e7eb;
+        text-align: center;
+        font-size: 0.9rem;
+        font-weight: 500;
+        -moz-appearance: textfield;
+    }
+    .quantity-selector input::-webkit-outer-spin-button,
+    .quantity-selector input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
     .empty-cart {
         text-align: center;
         padding: 3rem 1rem;

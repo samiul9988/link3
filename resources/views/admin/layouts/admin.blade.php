@@ -28,6 +28,39 @@
         .table-hover tbody tr { cursor: pointer; }
         .sidebar-logo { padding: 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
         .sidebar-logo h4 { color: white; font-weight: 700; font-size: 18px; }
+        nav[role="navigation"] { margin-top: 1rem; }
+        nav[role="navigation"] span.inline-flex,
+        nav[role="navigation"] a.inline-flex {
+            display: inline-flex !important;
+            align-items: center !important;
+            padding: 0.375rem 0.75rem !important;
+            font-size: 0.875rem !important;
+            line-height: 1.25rem !important;
+            border: 1px solid #dee2e6 !important;
+            background: #fff !important;
+            color: #0d6efd !important;
+            text-decoration: none !important;
+            border-radius: 0 !important;
+        }
+        nav[role="navigation"] span.inline-flex:first-child,
+        nav[role="navigation"] a.inline-flex:first-child {
+            border-radius: 0.375rem 0 0 0.375rem !important;
+        }
+        nav[role="navigation"] span.inline-flex:last-child,
+        nav[role="navigation"] a.inline-flex:last-child {
+            border-radius: 0 0.375rem 0.375rem 0 !important;
+        }
+        nav[role="navigation"] span[aria-current="page"] span {
+            background: #0d6efd !important;
+            color: #fff !important;
+            border-color: #0d6efd !important;
+        }
+        nav[role="navigation"] span[aria-disabled="true"] span {
+            color: #6c757d !important;
+            background: #fff !important;
+            cursor: not-allowed !important;
+        }
+        nav[role="navigation"] svg { width: 16px; height: 16px; }
     </style>
     @stack('styles')
 </head>
