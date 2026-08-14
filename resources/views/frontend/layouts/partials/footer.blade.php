@@ -73,7 +73,7 @@
                 </ul>
 
                 <h6 class="fw-semibold text-white mb-2 mt-3">Newsletter</h6>
-                <form action="{{ url('/subscribe') }}" method="POST" class="newsletter-form">
+                <form action="{{ url('/newsletter') }}" method="POST" class="newsletter-form">
                     @csrf
                     <div class="input-group input-group-sm">
                         <input type="email" name="email" class="form-control" placeholder="Your email" required>

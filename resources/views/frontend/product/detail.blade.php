@@ -384,8 +384,9 @@
         </div>
     </div>
 
+    {{-- Description & Reviews Tabs --}}
     @if(!empty($product->full_description) || (isset($reviews) && $reviews->count()))
-        <div class="row">
+        <div class="row mt-4">
             <div class="col-12">
                 <ul class="nav nav-tabs mb-4" id="productTabs" role="tablist">
                     @if(!empty($product->full_description))
@@ -445,16 +446,60 @@
                 </div>
             </div>
         </div>
-    @elseif(!empty($product->full_description))
+    @endif
+
+    {{-- Review Submission Form - Always visible --}}
+    @auth('customer')
         <div class="row mt-4">
-            <div class="col-12">
-                <h5 class="fw-semibold mb-3">Description</h5>
-                <div class="p-3 bg-white rounded shadow-sm" style="line-height: 1.8;">
-                    {!! $product->full_description !!}
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-white py-3">
+                        <h6 class="fw-semibold mb-0"><i class="fa-solid fa-pen-to-square me-2 text-primary"></i> Write a Review</h6>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('customer.review.submit') }}" method="POST">
+                            @csrf
+                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                            <div class="mb-3">
+                                <label class="form-label fw-semibold">Rating <span class="text-danger">*</span></label>
+                                <div class="star-rating-input d-flex gap-1">
+                                    @for($i = 5; $i >= 1; $i--)
+                                        <input type="radio" name="rating" id="star{{ $i }}" value="{{ $i }}" {{ old('rating') == $i ? 'checked' : '' }}>
+                                        <label for="star{{ $i }}"><i class="fa-solid fa-star"></i></label>
+                                    @endfor
+                                </div>
+                                @error('rating')
+                                    <div class="text-danger small mt-1">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-3">
+                                <label for="reviewComment" class="form-label fw-semibold">Your Review</label>
+                                <textarea name="comment" id="reviewComment" class="form-control" rows="4" placeholder="Share your experience with this product...">{{ old('comment') }}</textarea>
+                                @error('comment')
+                                    <div class="text-danger small mt-1">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fa-solid fa-paper-plane me-1"></i> Submit Review
+                            </button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-    @endif
+    @else
+        <div class="row mt-4">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body text-center py-4">
+                        <i class="fa-solid fa-pen-to-square fa-2x text-muted mb-2"></i>
+                        <p class="text-muted mb-2">Want to share your experience with this product?</p>
+                        <a href="{{ url('/login') }}" class="btn btn-primary btn-sm">Login to Write a Review</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endauth
 </div>
 
 @if(isset($relatedProducts) && $relatedProducts->count())
