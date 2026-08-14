@@ -16,7 +16,17 @@ class SettingController extends Controller
 
     public function update(Request $request)
     {
-        foreach ($request->except(['_token', 'logo', 'favicon']) as $key => $value) {
+        $checkboxes = [
+            'show_flash_deals', 'show_featured', 'show_new_arrivals',
+            'show_best_selling', 'show_category_showcase', 'show_brand_showcase',
+            'cod_enabled', 'bkash_enabled', 'nagad_enabled',
+        ];
+
+        foreach ($checkboxes as $key) {
+            SettingHelper::set($key, $request->has($key) ? 1 : 0);
+        }
+
+        foreach ($request->except(array_merge(['_token', 'logo', 'favicon'], $checkboxes)) as $key => $value) {
             SettingHelper::set($key, $value);
         }
         if ($request->hasFile('logo')) {

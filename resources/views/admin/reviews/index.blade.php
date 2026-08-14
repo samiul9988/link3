@@ -35,7 +35,7 @@
                         </span>
                     </td>
                     <td>
-                        <form action="{{ route('admin.reviews.toggle', $review) }}" method="POST" class="d-inline">
+                        <form action="{{ route('admin.reviews.status', $review) }}" method="POST" class="d-inline">
                             @csrf
                             <button type="submit" class="btn btn-sm btn-outline-info" title="Toggle Status">
                                 <i class="fas fa-toggle-{{ $review->status ? 'on' : 'off' }}"></i>

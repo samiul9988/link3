@@ -272,11 +272,20 @@
                             </div>
                         @endif
 
-                        @php $deliveryCharge = ($subtotal ?? 0) > 5000 ? 0 : 60; @endphp
+                        @php
+                            $freeDeliveryAbove = (int) \App\Helpers\SettingHelper::get('free_delivery_above', 5000);
+                            $insideDhakaCharge = (int) \App\Helpers\SettingHelper::get('inside_dhaka_charge', 60);
+                            $outsideDhakaCharge = (int) \App\Helpers\SettingHelper::get('outside_dhaka_charge', 120);
+                            $deliveryCharge = ($subtotal ?? 0) > $freeDeliveryAbove ? 0 : $insideDhakaCharge;
+                        @endphp
                         <div class="d-flex justify-content-between mb-2">
                             <span class="text-muted">Est. Delivery</span>
                             <span class="fw-medium" id="summaryDelivery">
-                                ৳{{ number_format($deliveryCharge, 0) }}
+                                @if(($subtotal ?? 0) > $freeDeliveryAbove)
+                                    Free
+                                @else
+                                    Inside Dhaka: ৳{{ number_format($insideDhakaCharge, 0) }} / Outside: ৳{{ number_format($outsideDhakaCharge, 0) }}
+                                @endif
                             </span>
                         </div>
 
@@ -403,7 +412,7 @@
             $.ajax({
                 url: '{{ url("/cart/coupon") }}',
                 method: 'POST',
-                data: { coupon_code: code },
+                data: { code: code },
                 success: function(res) {
                     $('#couponMessage').html(
                         '<span class="text-success">' + (res.message || 'Coupon applied!') + '</span>'

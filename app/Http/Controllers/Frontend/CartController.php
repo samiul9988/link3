@@ -50,7 +50,7 @@ class CartController extends Controller
     {
         $result = CartHelper::applyCoupon($request->code);
         if ($request->ajax()) {
-            return response()->json($result + ['discount' => CartHelper::discount(), 'subtotal' => CartHelper::subtotal()]);
+            return response()->json($result + ['discount' => CartHelper::discount(), 'subtotal' => CartHelper::subtotal(), 'total' => CartHelper::subtotal() - CartHelper::discount()]);
         }
         if ($result['success']) return back()->with('success', $result['message']);
         return back()->with('error', $result['message']);

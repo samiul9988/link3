@@ -20,9 +20,8 @@
                     <h6 class="fw-semibold mb-0">Profile Information</h6>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('/account/profile') }}" method="POST">
+                    <form action="{{ route('customer.profile.update') }}" method="POST">
                         @csrf
-                        @method('PUT')
 
                         <div class="row g-3">
                             <div class="col-md-6">
@@ -65,9 +64,8 @@
                     <h6 class="fw-semibold mb-0">Change Password</h6>
                 </div>
                 <div class="card-body">
-                    <form action="{{ url('/account/change-password') }}" method="POST">
+                    <form action="{{ route('customer.password.change') }}" method="POST">
                         @csrf
-                        @method('PUT')
 
                         <div class="row g-3">
                             <div class="col-md-4">
@@ -80,17 +78,17 @@
                             </div>
 
                             <div class="col-md-4">
-                                <label for="new_password" class="form-label" style="font-size: 0.85rem;">New Password</label>
-                                <input type="password" id="new_password" name="new_password"
-                                       class="form-control @error('new_password') is-invalid @enderror" required>
-                                @error('new_password')
+                                <label for="password" class="form-label" style="font-size: 0.85rem;">New Password</label>
+                                <input type="password" id="password" name="password"
+                                       class="form-control @error('password') is-invalid @enderror" required>
+                                @error('password')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
                             <div class="col-md-4">
-                                <label for="new_password_confirmation" class="form-label" style="font-size: 0.85rem;">Confirm New Password</label>
-                                <input type="password" id="new_password_confirmation" name="new_password_confirmation"
+                                <label for="password_confirmation" class="form-label" style="font-size: 0.85rem;">Confirm New Password</label>
+                                <input type="password" id="password_confirmation" name="password_confirmation"
                                        class="form-control" required>
                             </div>
                         </div>

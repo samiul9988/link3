@@ -52,7 +52,7 @@
                         <a href="{{ route('admin.customers.show', $customer) }}" class="btn btn-sm btn-outline-primary" title="View Details">
                             <i class="fas fa-eye"></i>
                         </a>
-                        <form action="{{ route('admin.customers.toggleStatus', $customer) }}" method="POST" class="d-inline">
+                        <form action="{{ route('admin.customers.status', $customer) }}" method="POST" class="d-inline">
                             @csrf
                             <button type="submit" class="btn btn-sm btn-outline-{{ $customer->status ? 'danger' : 'success' }}"
                                     title="{{ $customer->status ? 'Deactivate' : 'Activate' }}">

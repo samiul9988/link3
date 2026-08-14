@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <meta name="theme-color" content="#0D9488">
+    <meta name="theme-color" content="{{ setting('primary_color', '#0D9488') }}">
     <title>{{ $pageTitle ?? setting('site_name', 'E-Commerce') }}</title>
     <meta name="description" content="{{ $metaDescription ?? setting('meta_description', '') }}">
     <meta name="keywords" content="{{ $metaKeywords ?? setting('meta_keywords', '') }}">
@@ -18,11 +18,11 @@
 
     <style>
         :root {
-            --primary: #0D9488;
-            --primary-dark: #0F766E;
+            --primary: {{ setting('primary_color', '#0D9488') }};
+            --primary-dark: {{ setting('primary_color', '#0D9488') }};
             --primary-light: #CCFBF1;
             --primary-50: #F0FDFA;
-            --bs-primary: #0D9488;
+            --bs-primary: {{ setting('primary_color', '#0D9488') }};
             --bs-primary-rgb: 13, 148, 136;
         }
 

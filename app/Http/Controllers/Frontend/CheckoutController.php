@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\CustomerAddress;
 use App\Helpers\CartHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -19,10 +20,17 @@ class CheckoutController extends Controller
         $subtotal = CartHelper::subtotal();
         $discount = CartHelper::discount();
         $coupon = CartHelper::appliedCoupon();
-        $deliveryCharge = $subtotal > (int) \App\Helpers\SettingHelper::get('free_delivery_above', 5000) ? 0 : (int) \App\Helpers\SettingHelper::get('inside_dhaka_charge', 60);
+
+        $insideDhakaCharge = (int) \App\Helpers\SettingHelper::get('inside_dhaka_charge', 60);
+        $outsideDhakaCharge = (int) \App\Helpers\SettingHelper::get('outside_dhaka_charge', 120);
+        $freeDeliveryAbove = (int) \App\Helpers\SettingHelper::get('free_delivery_above', 5000);
+
+        $defaultAddress = $addresses->where('is_default', true)->first() ?: $addresses->first();
+        $isInsideDhaka = !$defaultAddress || strtolower($defaultAddress->district) === 'dhaka';
+        $deliveryCharge = $subtotal > $freeDeliveryAbove ? 0 : ($isInsideDhaka ? $insideDhakaCharge : $outsideDhakaCharge);
         $total = $subtotal - $discount + $deliveryCharge;
         
-        return view('frontend.checkout.index', compact('cartItems', 'addresses', 'subtotal', 'discount', 'coupon', 'deliveryCharge', 'total'));
+        return view('frontend.checkout.index', compact('cartItems', 'addresses', 'subtotal', 'discount', 'coupon', 'deliveryCharge', 'total', 'insideDhakaCharge', 'outsideDhakaCharge', 'freeDeliveryAbove'));
     }
 
     public function placeOrder(Request $request)
@@ -34,6 +42,10 @@ class CheckoutController extends Controller
             'customer_note' => 'nullable|string',
         ]);
 
+        $address = CustomerAddress::where('id', $request->address_id)
+            ->where('customer_id', auth()->guard('customer')->id())
+            ->firstOrFail();
+
         $cartItems = CartHelper::items();
         if ($cartItems->isEmpty()) return back()->with('error', 'Cart is empty.');
 
@@ -42,20 +54,25 @@ class CheckoutController extends Controller
             $subtotal = CartHelper::subtotal();
             $discount = CartHelper::discount();
             $coupon = CartHelper::appliedCoupon();
-            $deliveryCharge = $subtotal > (int) \App\Helpers\SettingHelper::get('free_delivery_above', 5000) ? 0 : (int) \App\Helpers\SettingHelper::get('inside_dhaka_charge', 60);
+
+            $freeDeliveryAbove = (int) \App\Helpers\SettingHelper::get('free_delivery_above', 5000);
+            $isInsideDhaka = strtolower($address->district) === 'dhaka';
+            $deliveryCharge = $subtotal > $freeDeliveryAbove ? 0 : ($isInsideDhaka
+                ? (int) \App\Helpers\SettingHelper::get('inside_dhaka_charge', 60)
+                : (int) \App\Helpers\SettingHelper::get('outside_dhaka_charge', 120));
             $total = $subtotal - $discount + $deliveryCharge;
 
             $order = Order::create([
                 'order_number' => 'ORD-' . date('Ymd') . '-' . strtoupper(substr(uniqid(), -6)),
                 'customer_id' => auth()->guard('customer')->id(),
-                'address_id' => $request->address_id,
+                'address_id' => $address->id,
                 'coupon_id' => $coupon ? $coupon->id : null,
                 'subtotal' => $subtotal,
                 'discount' => $discount,
                 'delivery_charge' => $deliveryCharge,
                 'total' => $total,
                 'payment_method' => $request->payment_method,
-                'payment_status' => $request->payment_method === 'cod' ? 'pending' : 'pending',
+                'payment_status' => 'pending',
                 'order_status' => 'pending',
                 'transaction_id' => $request->transaction_id,
                 'customer_note' => $request->customer_note,

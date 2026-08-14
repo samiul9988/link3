@@ -1,6 +1,6 @@
 @php
     $siteName = setting('site_name', 'E-Commerce');
-    $logo = setting('site_logo');
+    $logo = setting('logo');
     $topBarText = setting('topbar_text', 'Welcome to our store!');
     $categories = \App\Models\Category::where('status', 1)->whereNull('parent_id')->with(['children' => function($q) { $q->where('status', 1); }])->orderBy('sort_order')->take(10)->get();
     $pages = \App\Models\Page::where('status', 1)->orderBy('id')->get();

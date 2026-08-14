@@ -142,7 +142,7 @@ class CartHelper
             return ['success' => false, 'message' => 'Minimum order amount is ' . number_format($coupon->min_order_amount, 2) . ' BDT.'];
         }
         Session::put('coupon_code', $coupon->code);
-        return ['success' => true, 'message' => 'Coupon applied successfully!'];
+        return ['success' => true, 'message' => 'Coupon applied successfully!', 'code' => $coupon->code];
     }
 
     public static function removeCoupon()

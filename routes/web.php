@@ -25,8 +25,8 @@ Route::post('/checkout/place-order', [App\Http\Controllers\Frontend\CheckoutCont
 Route::get('/order/success/{order}', [App\Http\Controllers\Frontend\CheckoutController::class, 'success'])->name('order.success');
 
 // Customer Routes
-Route::middleware('auth:customer')->prefix('customer')->name('customer.')->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\Frontend\CustomerController::class, 'dashboard'])->name('dashboard');
+Route::middleware('auth:customer')->prefix('account')->name('customer.')->group(function () {
+    Route::get('/', [App\Http\Controllers\Frontend\CustomerController::class, 'dashboard'])->name('dashboard');
     Route::get('/orders', [App\Http\Controllers\Frontend\CustomerController::class, 'orders'])->name('orders');
     Route::get('/orders/{order}', [App\Http\Controllers\Frontend\CustomerController::class, 'orderDetail'])->name('order.detail');
     Route::post('/orders/{order}/cancel', [App\Http\Controllers\Frontend\CustomerController::class, 'cancelOrder'])->name('order.cancel');

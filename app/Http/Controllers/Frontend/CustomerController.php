@@ -84,7 +84,10 @@ class CustomerController extends Controller
         if ($request->boolean('is_default')) {
             auth()->guard('customer')->user()->addresses()->update(['is_default' => 0]);
         }
-        \App\Models\CustomerAddress::create($data);
+        $address = \App\Models\CustomerAddress::create($data);
+        if ($request->ajax()) {
+            return response()->json(['success' => true, 'address' => $address, 'message' => 'Address added.']);
+        }
         return back()->with('success', 'Address added.');
     }
 
@@ -92,7 +95,25 @@ class CustomerController extends Controller
     {
         $address = \App\Models\CustomerAddress::findOrFail($id);
         if ($address->customer_id !== auth()->guard('customer')->id()) abort(403);
-        $address->update($request->all());
+        $data = $request->validate([
+            'full_name' => 'required|string|max:255',
+            'phone' => 'required|string|max:20',
+            'email' => 'nullable|email|max:255',
+            'division' => 'required|string|max:255',
+            'district' => 'required|string|max:255',
+            'upazila' => 'nullable|string|max:255',
+            'address_line' => 'required|string',
+            'postal_code' => 'nullable|string|max:20',
+            'type' => 'nullable|in:home,office,other',
+            'is_default' => 'nullable|boolean',
+        ]);
+        if ($request->boolean('is_default')) {
+            auth()->guard('customer')->user()->addresses()->where('id', '!=', $id)->update(['is_default' => 0]);
+        }
+        $address->update($data);
+        if ($request->ajax()) {
+            return response()->json(['success' => true, 'address' => $address, 'message' => 'Address updated.']);
+        }
         return back()->with('success', 'Address updated.');
     }
 
