@@ -121,36 +121,7 @@
                                     </div>
                                 @endif
 
-                                <hr class="my-4">
 
-                                <h6 class="fw-semibold mb-3">Follow Us</h6>
-                                <div class="d-flex gap-2">
-                                    @if(setting('facebook_url'))
-                                        <a href="{{ setting('facebook_url') }}" target="_blank" class="btn btn-outline-primary rounded-circle" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
-                                            <i class="fab fa-facebook-f"></i>
-                                        </a>
-                                    @endif
-                                    @if(setting('instagram_url'))
-                                        <a href="{{ setting('instagram_url') }}" target="_blank" class="btn btn-outline-primary rounded-circle" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
-                                            <i class="fab fa-instagram"></i>
-                                        </a>
-                                    @endif
-                                    @if(setting('twitter_url'))
-                                        <a href="{{ setting('twitter_url') }}" target="_blank" class="btn btn-outline-primary rounded-circle" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
-                                            <i class="fab fa-x-twitter"></i>
-                                        </a>
-                                    @endif
-                                    @if(setting('youtube_url'))
-                                        <a href="{{ setting('youtube_url') }}" target="_blank" class="btn btn-outline-danger rounded-circle" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
-                                            <i class="fab fa-youtube"></i>
-                                        </a>
-                                    @endif
-                                    @if(setting('whatsapp_number'))
-                                        <a href="https://wa.me/{{ setting('whatsapp_number') }}" target="_blank" class="btn btn-outline-success rounded-circle" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;">
-                                            <i class="fab fa-whatsapp"></i>
-                                        </a>
-                                    @endif
-                                </div>
                             </div>
                         </div>
                     </div>
