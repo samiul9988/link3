@@ -287,19 +287,31 @@
         .category-card .name { font-size: 0.85rem; font-weight: 500; }
 
         .hero-slide {
-            height: 700px;
-            background-size: cover;
-            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero-slide img {
+            width: 100%;
+            height: auto;
+            display: block;
+            object-fit: cover;
+        }
+        .hero-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
             display: flex;
             align-items: center;
+            background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 100%);
         }
-        .hero-slide .content { max-width: 600px; }
-        .hero-slide .content h2 { font-size: 3rem; font-weight: 700; }
-        .hero-slide .content p { font-size: 1.15rem; opacity: 0.85; }
+        .hero-content .content { max-width: 600px; }
+        .hero-content .content h2 { font-size: 3rem; font-weight: 700; }
+        .hero-content .content p { font-size: 1.15rem; opacity: 0.85; }
         @media (max-width: 768px) {
-            .hero-slide { height: 400px; }
-            .hero-slide .content h2 { font-size: 1.6rem; }
-            .hero-slide .content p { font-size: 0.9rem; }
+            .hero-content .content h2 { font-size: 1.6rem; }
+            .hero-content .content p { font-size: 0.9rem; }
         }
 
         .newsletter-form .input-group { max-width: 400px; }
