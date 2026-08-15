@@ -7,10 +7,6 @@ class PageController extends Controller
 {
     public function show($slug)
     {
-        if ($slug === 'contact') {
-            return view('frontend.pages.contact');
-        }
-
         $page = Page::where('slug', $slug)->where('status', 1)->firstOrFail();
         return view('frontend.pages.dynamic', compact('page'));
     }

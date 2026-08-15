@@ -15,23 +15,23 @@
                 @endif
                 <p class="text-white-50" style="font-size: 0.85rem;">{{ setting('site_about', 'Your trusted online shopping destination.') }}</p>
                 <div class="d-flex gap-2 mt-3">
-                    @if(setting('social_facebook'))
-                        <a href="{{ setting('social_facebook') }}" target="_blank" class="btn btn-sm btn-outline-light rounded-circle" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;">
+                    @if(setting('facebook_url'))
+                        <a href="{{ setting('facebook_url') }}" target="_blank" class="btn btn-sm btn-outline-light rounded-circle" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;">
                             <i class="fa-brands fa-facebook-f"></i>
                         </a>
                     @endif
-                    @if(setting('social_instagram'))
-                        <a href="{{ setting('social_instagram') }}" target="_blank" class="btn btn-sm btn-outline-light rounded-circle" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;">
+                    @if(setting('instagram_url'))
+                        <a href="{{ setting('instagram_url') }}" target="_blank" class="btn btn-sm btn-outline-light rounded-circle" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;">
                             <i class="fa-brands fa-instagram"></i>
                         </a>
                     @endif
-                    @if(setting('social_twitter'))
-                        <a href="{{ setting('social_twitter') }}" target="_blank" class="btn btn-sm btn-outline-light rounded-circle" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;">
+                    @if(setting('twitter_url'))
+                        <a href="{{ setting('twitter_url') }}" target="_blank" class="btn btn-sm btn-outline-light rounded-circle" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;">
                             <i class="fa-brands fa-x-twitter"></i>
                         </a>
                     @endif
-                    @if(setting('social_youtube'))
-                        <a href="{{ setting('social_youtube') }}" target="_blank" class="btn btn-sm btn-outline-light rounded-circle" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;">
+                    @if(setting('youtube_url'))
+                        <a href="{{ setting('youtube_url') }}" target="_blank" class="btn btn-sm btn-outline-light rounded-circle" style="width:34px;height:34px;display:flex;align-items:center;justify-content:center;">
                             <i class="fa-brands fa-youtube"></i>
                         </a>
                     @endif
