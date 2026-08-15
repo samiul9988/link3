@@ -21,11 +21,11 @@
                         <div class="container">
                             <div class="content">
                                 @if($slider->subtitle)
-                                    <p class="text-white mb-2 fw-medium" style="letter-spacing: 1px;">{{ $slider->subtitle }}</p>
+                                    <p class="text-white mb-2 fw-medium subtitle">{{ $slider->subtitle }}</p>
                                 @endif
                                 <h2 class="text-white mb-3">{{ $slider->title }}</h2>
                                 @if($slider->description)
-                                    <p class="text-white mb-4">{{ $slider->description }}</p>
+                                    <p class="text-white mb-4 description">{{ $slider->description }}</p>
                                 @endif
                                 @if($slider->button_text && $slider->link)
                                     <a href="{{ $slider->link }}" class="btn btn-primary px-4 py-2 fw-medium">{{ $slider->button_text }}</a>

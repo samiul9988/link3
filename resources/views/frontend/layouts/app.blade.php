@@ -306,12 +306,55 @@
             align-items: center;
             background: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 100%);
         }
-        .hero-content .content { max-width: 600px; }
-        .hero-content .content h2 { font-size: 3rem; font-weight: 700; }
-        .hero-content .content p { font-size: 1.15rem; opacity: 0.85; }
+        .hero-content .content { 
+            max-width: 600px; 
+            padding: 20px 0;
+        }
+        .hero-content .content h2 { 
+            font-size: 3rem; 
+            font-weight: 700; 
+            line-height: 1.2;
+        }
+        .hero-content .content p { 
+            font-size: 1.15rem; 
+            opacity: 0.85; 
+            line-height: 1.5;
+        }
+        .hero-content .content .btn {
+            font-size: 1rem;
+            padding: 10px 24px;
+        }
+        .hero-content .content .subtitle {
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+        }
         @media (max-width: 768px) {
-            .hero-content .content h2 { font-size: 1.6rem; }
-            .hero-content .content p { font-size: 0.9rem; }
+            .hero-content .content { 
+                max-width: 100%; 
+                padding: 15px 0;
+            }
+            .hero-content .content h2 { 
+                font-size: 1.4rem; 
+                margin-bottom: 8px !important;
+            }
+            .hero-content .content p { 
+                font-size: 0.85rem; 
+                margin-bottom: 12px !important;
+            }
+            .hero-content .content .btn {
+                font-size: 0.85rem;
+                padding: 8px 18px;
+            }
+            .hero-content .content .subtitle {
+                font-size: 0.75rem;
+                margin-bottom: 4px !important;
+            }
+            .hero-content .content .description {
+                display: -webkit-box;
+                -webkit-line-clamp: 3;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
         }
 
         .newsletter-form .input-group { max-width: 400px; }
