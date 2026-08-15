@@ -41,11 +41,11 @@
             <div class="col-lg-2 col-md-6">
                 <h6 class="fw-semibold text-white mb-3">Quick Links</h6>
                 <ul class="list-unstyled" style="font-size: 0.85rem;">
-                    <li class="mb-2"><a href="{{ url('/about') }}" class="text-white-50 text-decoration-none">About Us</a></li>
-                    <li class="mb-2"><a href="{{ url('/contact') }}" class="text-white-50 text-decoration-none">Contact</a></li>
-                    <li class="mb-2"><a href="{{ url('/faq') }}" class="text-white-50 text-decoration-none">FAQ</a></li>
+                    <li class="mb-2"><a href="{{ url('/page/about-us') }}" class="text-white-50 text-decoration-none">About Us</a></li>
+                    <li class="mb-2"><a href="{{ url('/page/contact') }}" class="text-white-50 text-decoration-none">Contact</a></li>
+                    <li class="mb-2"><a href="{{ url('/page/faq') }}" class="text-white-50 text-decoration-none">FAQ</a></li>
                     <li class="mb-2"><a href="{{ url('/page/privacy-policy') }}" class="text-white-50 text-decoration-none">Privacy Policy</a></li>
-                    <li class="mb-2"><a href="{{ url('/page/terms-conditions') }}" class="text-white-50 text-decoration-none">Terms & Conditions</a></li>
+                    <li class="mb-2"><a href="{{ url('/page/terms') }}" class="text-white-50 text-decoration-none">Terms & Conditions</a></li>
                 </ul>
             </div>
 
