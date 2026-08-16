@@ -24,7 +24,11 @@ class ProductController extends Controller
     {
         $query = Product::with(['images', 'brand', 'category'])->where('status', 1);
         if ($request->filled('category')) $query->whereHas('category', fn($q) => $q->where('slug', $request->category));
-        if ($request->filled('brand')) $query->whereHas('brand', fn($q) => $q->where('slug', $request->brand));
+        if ($request->filled('brands') && is_array($request->brands)) {
+            $query->whereHas('brand', fn($q) => $q->whereIn('slug', $request->brands));
+        } elseif ($request->filled('brand')) {
+            $query->whereHas('brand', fn($q) => $q->where('slug', $request->brand));
+        }
         if ($request->filled('min_price')) $query->where('sale_price', '>=', $request->min_price)->orWhere(function($q) use ($request) { $q->whereNull('sale_price')->where('regular_price', '>=', $request->min_price); });
         if ($request->filled('max_price')) $query->where('sale_price', '<=', $request->max_price)->orWhere(function($q) use ($request) { $q->whereNull('sale_price')->where('regular_price', '<=', $request->max_price); });
         if ($request->filled('in_stock')) $query->where('stock_quantity', '>', 0);
@@ -45,6 +49,7 @@ class ProductController extends Controller
         $pageTitle = 'All Products';
         if ($request->filled('category')) $pageTitle = 'Category: ' . optional($categories->where('slug', $request->category)->first())->name;
         if ($request->filled('brand')) $pageTitle = 'Brand: ' . optional($brands->where('slug', $request->brand)->first())->name;
+        if ($request->filled('brands') && is_array($request->brands) && count($request->brands) === 1) $pageTitle = 'Brand: ' . optional($brands->where('slug', $request->brands[0])->first())->name;
 
         return view('frontend.product.listing', compact('products', 'categories', 'brands', 'pageTitle'));
     }

@@ -1,7 +1,8 @@
 <form id="filterForm" method="GET" action="{{ url()->current() }}">
     @php
         $activeCategory = request('category');
-        $activeBrands = array_filter(explode(',', request('brands', '')));
+        $brandsInput = request('brands', '');
+        $activeBrands = is_array($brandsInput) ? array_filter($brandsInput) : array_filter(explode(',', $brandsInput));
         $inStockOnly = request('in_stock');
         $minPrice = request('min_price');
         $maxPrice = request('max_price');

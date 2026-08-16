@@ -12,7 +12,11 @@ class CategoryController extends Controller
     {
         $category = Category::where('slug', $slug)->firstOrFail();
         $query = Product::with(['images', 'brand'])->where('category_id', $category->id)->where('status', 1);
-        if ($request->filled('brand')) $query->whereHas('brand', fn($q) => $q->where('slug', $request->brand));
+        if ($request->filled('brands') && is_array($request->brands)) {
+            $query->whereHas('brand', fn($q) => $q->whereIn('slug', $request->brands));
+        } elseif ($request->filled('brand')) {
+            $query->whereHas('brand', fn($q) => $q->where('slug', $request->brand));
+        }
         if ($request->filled('in_stock')) $query->where('stock_quantity', '>', 0);
         
         $sort = $request->sort ?? 'latest';
