@@ -200,9 +200,11 @@
                         @php
                             $params = request()->except('page');
                             if (isset($filter['remove_value'])) {
-                                $remaining = array_diff(explode(',', $params[$filter['remove_param']] ?? ''), [$filter['remove_value']]);
+                                $current = $params[$filter['remove_param']] ?? '';
+                                $currentArr = is_array($current) ? $current : array_filter(explode(',', $current));
+                                $remaining = array_diff($currentArr, [$filter['remove_value']]);
                                 if (count($remaining)) {
-                                    $params[$filter['remove_param']] = implode(',', $remaining);
+                                    $params[$filter['remove_param']] = array_values($remaining);
                                 } else {
                                     unset($params[$filter['remove_param']]);
                                 }
