@@ -163,7 +163,8 @@
                         'remove_param' => 'category',
                     ];
                 }
-                $activeBrands = array_filter(explode(',', request('brands', '')));
+                $brandsInput = request('brands', '');
+                $activeBrands = is_array($brandsInput) ? array_filter($brandsInput) : array_filter(explode(',', $brandsInput));
                 foreach ($activeBrands as $bslug) {
                     $bname = $brands->firstWhere('slug', $bslug)?->name ?? $bslug;
                     $activeFilters[] = [
